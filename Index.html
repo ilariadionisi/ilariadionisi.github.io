@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilaria Dionisi — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #033958;
+    --teal:   #04768F;
+    --orange: #ED9465;
+    --orange-dark: #C97040;
+    --purple: #6B4FA0;
+    --purple-light: #F3EFF8;
+    --purple-bg: #FAF8FC;
+    --green:  #2A7A4B;
+    --bg:     #F7F6F3;
+    --white:  #FFFFFF;
+    --text:   #1A1A1A;
+    --muted:  #6B6B6B;
+    --border: #E2E0DC;
+    --card-bg: #F0EEE9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--navy);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .header-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--navy);
+    letter-spacing: -1px;
+  }
+
+  .header-name em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .header-role {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-top: 10px;
+  }
+
+  .header-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: right;
+  }
+
+  .header-contacts a,
+  .header-contacts span {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .header-contacts a:hover { color: var(--teal); }
+
+  /* ── TOP GRID ── */
+  .top-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .profilo-text {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .edu-block {
+    border-left: 3px solid var(--navy);
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+
+  .edu-block.teal { border-color: var(--teal); }
+
+  .edu-year {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .edu-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .edu-sub {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .skill-row {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text);
+    padding: 3px 0;
+    align-items: baseline;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .skill-row:last-child { border-bottom: none; }
+
+  .skill-cat {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--teal);
+    min-width: 68px;
+    flex-shrink: 0;
+  }
+
+  /* ── ACCORDION ── */
+  .acc-title {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .acc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.25s forwards;
+  }
+
+  .acc-item {}
+
+  .acc-trigger {
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+  }
+
+  .acc-bar {
+    width: 4px;
+    flex-shrink: 0;
+    transition: width 0.18s ease;
+  }
+
+  .acc-trigger:hover .acc-bar,
+  .acc-item.open .acc-trigger .acc-bar { width: 7px; }
+
+  .acc-head {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    background: #ECEAE5;
+    transition: background 0.15s;
+  }
+
+  .acc-item.open .acc-head,
+  .acc-trigger:hover .acc-head { background: #E4E2DC; }
+
+  .acc-head-current {
+    background: var(--purple-light) !important;
+  }
+
+  .acc-item.open .acc-head-current { background: #EAE4F2 !important; }
+
+  .acc-head-left {}
+
+  .acc-date {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .acc-role {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .acc-role-current { color: var(--purple); }
+
+  .acc-company {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .acc-head-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .badge {
+    font-size: 9px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .chevron {
+    width: 16px;
+    height: 16px;
+    color: var(--muted);
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    flex-shrink: 0;
+  }
+
+  .acc-item.open .chevron { transform: rotate(180deg); }
+
+  .acc-panel {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .acc-item.open .acc-panel { max-height: 600px; }
+
+  .acc-body {
+    padding: 16px 20px 18px 20px;
+    border-left: 3px solid transparent;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .acc-body-current { background: var(--purple-bg); }
+
+  .acc-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .acc-bullets li {
+    font-size: 12px;
+    color: #444;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  .acc-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  .acc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .acc-tag {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--card-bg);
+    color: var(--muted);
+    border: 0.5px solid var(--border);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.35s forwards;
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .cert-card {
+    padding: 10px 14px;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .cert-left { flex: 1; }
+
+  .cert-date {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .cert-date.purple { color: var(--purple); }
+  .cert-date.orange { color: var(--orange-dark); }
+
+  .cert-name {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .cert-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    display: block;
+  }
+
+  .cert-badge {
+    font-size: 9px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    font-style: italic;
+  }
+
+  .footer-date {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .page { padding: 1.5rem; max-width: 100%; }
+    .acc-panel { max-height: none !important; overflow: visible !important; }
+    .acc-body { display: block !important; }
+    .chevron { display: none; }
+    .header, .top-grid, .acc-title, .acc-list, .cert-section { opacity: 1 !important; animation: none !important; }
+  }
+
+  @media (max-width: 640px) {
+    .header { grid-template-columns: 1fr; }
+    .header-contacts { text-align: left; }
+    .header-name { font-size: 38px; }
+    .top-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <h1 class="header-name">Ilaria <em>Dionisi</em></h1>
+      <p class="header-role">Management Consulting Manager</p>
+    </div>
+    <div class="header-contacts">
+      <a href="https://www.linkedin.com/in/ilariadionisi-1409" target="_blank">linkedin.com/in/ilariadionisi-1409</a>
+      <span>Rome, Italy</span>
+    </div>
+  </header>
+
+  <!-- TOP GRID -->
+  <div class="top-grid">
+    <div>
+      <p class="section-label">Profile</p>
+      <p class="profilo-text">Management Consulting Manager focused on complex digital transformation projects. Over nearly ten years I have moved through every level of consulting — from process analysis to programme leadership — building the ability to turn strategic objectives into concrete execution. My approach is results-driven: clarity on the goals, rigour in the way work is run, and constant attention to the quality of what we deliver.</p>
+    </div>
+    <div>
+      <p class="section-label">Education</p>
+      <div class="edu-block">
+        <div class="edu-year">2011 – 2015</div>
+        <div class="edu-title">Bachelor in Business Administration</div>
+        <div class="edu-sub">University of Pisa</div>
+      </div>
+      <div class="edu-block teal">
+        <div class="edu-year">2015 – 2018</div>
+        <div class="edu-title">Master in Information &amp; Service Management</div>
+        <div class="edu-sub">University of Trento</div>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">Skills</p>
+      <div class="skill-row"><span class="skill-cat">Management</span><span>PM, Stakeholder mgmt, Leadership, Budget</span></div>
+      <div class="skill-row"><span class="skill-cat">Technical</span><span>MS Project, Visio, Excel, Jira</span></div>
+      <div class="skill-row"><span class="skill-cat">AI</span><span>Copilot, Claude, Agentic AI</span></div>
+      <div class="skill-row"><span class="skill-cat">Languages</span><span>Italian (native) · English (B2) · Spanish (A2)</span></div>
+    </div>
+  </div>
+
+  <!-- PERCORSO PROFESSIONALE -->
+  <p class="acc-title">Professional Experience</p>
+  <div class="acc-list" id="accordion">
+
+    <!-- HIT -->
+    <div class="acc-item" id="i1">
+      <button class="acc-trigger" onclick="toggle('i1')" aria-expanded="false">
+        <div class="acc-bar" style="background:#033958"></div>
+        <div class="acc-head">
+          <div class="acc-head-left">
+            <div class="acc-date">Jun 2017 – Jan 2018</div>
+            <div class="acc-role">Marketing Consultant</div>
+            <div class="acc-company">HIT – Hub Innovazione Trentino, Trento</div>
+          </div>
+          <div class="acc-head-right">
+            <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-body" style="border-left-color:#033958">
+          <ul class="acc-bullets">
+            <li>Joined as an intern and subsequently hired — a mark of the value brought to the organisation</li>
+            <li>Supported the planning and communication of open-innovation initiatives, coordinating multi-stakeholder activity across a complex digital ecosystem</li>
+            <li>Designed and ran collaborative initiatives to develop and test UX/UI solutions for technology products and services</li>
+            <li>Managed the project-coordination and communication tools supporting the Open Innovation Officer</li>
+          </ul>
+          <div class="acc-tags">
+            <span class="acc-tag">PowerPoint</span><span class="acc-tag">Excel</span><span class="acc-tag">Trello</span><span class="acc-tag">Mailchimp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUNICIPIA -->
+    <div class="acc-item" id="i2">
+      <button class="acc-trigger" onclick="toggle('i2')" aria-expanded="false">
+        <div class="acc-bar" style="background:#04768F"></div>
+        <div class="acc-head">
+          <div class="acc-head-left">
+            <div class="acc-date">Feb 2018 – May 2019</div>
+            <div class="acc-role">Information System Analyst Specialist</div>
+            <div class="acc-company">Municipia S.p.A., Bari</div>
+          </div>
+          <div class="acc-head-right">
+            <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-body" style="border-left-color:#04768F">
+          <ul class="acc-bullets">
+            <li>End-to-end involvement in information-system digitalisation projects for local public administrations, from requirements gathering to go-live, working alongside the lead manager and senior manager</li>
+            <li>AS-IS process mapping, gap analysis and definition of TO-BE models with the public administration's functional leads</li>
+            <li>Drafted functional-analysis documentation and translated business requirements into technical specifications for the development team</li>
+            <li>Application management and first- and second-level post-release support</li>
+          </ul>
+          <div class="acc-tags">
+            <span class="acc-tag">Word</span><span class="acc-tag">Excel</span><span class="acc-tag">Visio</span><span class="acc-tag">MySQL</span><span class="acc-tag">Jira</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PWC -->
+    <div class="acc-item" id="i3">
+      <button class="acc-trigger" onclick="toggle('i3')" aria-expanded="false">
+        <div class="acc-bar" style="background:#ED9465"></div>
+        <div class="acc-head">
+          <div class="acc-head-left">
+            <div class="acc-date">Jun 2019 – May 2021</div>
+            <div class="acc-role">Associate Consultant</div>
+            <div class="acc-company">PricewaterhouseCoopers Italy, Rome</div>
+          </div>
+          <div class="acc-head-right">
+            <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-body" style="border-left-color:#ED9465">
+          <ul class="acc-bullets">
+            <li>Ran operational activities independently in direct support of the client, within Consip's PA Procurement Rationalisation and e-Procurement divisions</li>
+            <li>Liaised directly with the reference public-administration officials to prepare tender documentation for procedures above €5M</li>
+            <li>Monitored tendered volumes and produced reporting in support of the division's annual targets</li>
+            <li>Ran functional testing on new releases of the Gare ASP platform, reporting and tracking defects</li>
+          </ul>
+          <div class="acc-tags">
+            <span class="acc-tag">Word</span><span class="acc-tag">Excel</span><span class="acc-tag">PowerPoint</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCENTURE CONSULTANT -->
+    <div class="acc-item" id="i4">
+      <button class="acc-trigger" onclick="toggle('i4')" aria-expanded="false">
+        <div class="acc-bar" style="background:#6B4FA0"></div>
+        <div class="acc-head">
+          <div class="acc-head-left">
+            <div class="acc-date">Jun 2021 – Oct 2024</div>
+            <div class="acc-role">Management Consultant</div>
+            <div class="acc-company">Accenture S.p.A., Rome</div>
+          </div>
+          <div class="acc-head-right">
+            <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-body" style="border-left-color:#6B4FA0">
+          <ul class="acc-bullets">
+            <li>Contributed to digital transformation programmes for central public administrations, focused on service modernisation and the integration of processes and systems</li>
+            <li>End-to-end redesign of public processes and services: from AS-IS analysis to TO-BE models, through to implementation support</li>
+            <li>Coordinated multidisciplinary project teams to define and release solutions, actively managing dependencies and risks</li>
+            <li>Owned the ongoing relationship with the institutional client: aligning on priorities, managing expectations and supporting senior-level decision-making</li>
+            <li>Prepared contractual and project documentation (Operating Plans, Executive Contracts, Work Plans)</li>
+          </ul>
+          <div class="acc-tags">
+            <span class="acc-tag">MS Office</span><span class="acc-tag">MS Project</span><span class="acc-tag">Visio</span><span class="acc-tag">Azure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCENTURE MANAGER (attuale) -->
+    <div class="acc-item" id="i5">
+      <button class="acc-trigger" onclick="toggle('i5')" aria-expanded="false">
+        <div class="acc-bar" style="background:#6B4FA0"></div>
+        <div class="acc-head acc-head-current">
+          <div class="acc-head-left">
+            <div class="acc-date">Nov 2024 – Present</div>
+            <div class="acc-role acc-role-current">Management Consulting Manager</div>
+            <div class="acc-company">Accenture S.p.A., Rome</div>
+          </div>
+          <div class="acc-head-right">
+            <span class="badge" style="background:#6B4FA0">current</span>
+            <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-body acc-body-current" style="border-left-color:#6B4FA0">
+          <ul class="acc-bullets">
+            <li>End-to-end leadership of digital transformation programmes for public-sector organisations, with budgets up to €1M and teams of 5–10 across multiple disciplines</li>
+            <li>Recovered and stabilised at-risk initiatives by redefining governance, realigning stakeholders and replanning critical activities</li>
+            <li>Developed and grew the team: mentoring junior colleagues, defining roles and progressively handing over ownership</li>
+            <li>Improved project margins through continuous financial monitoring and timely corrective action</li>
+            <li>Managed relationships with senior institutional stakeholders, focused on strategic alignment and change enablement</li>
+          </ul>
+          <div class="acc-tags">
+            <span class="acc-tag">MS Project</span><span class="acc-tag">Copilot</span><span class="acc-tag">Claude</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CERTIFICAZIONI -->
+  <div class="cert-section">
+    <p class="section-label">Certifications &amp; Continuing Education</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-left">
+          <span class="cert-date">May 2023</span>
+          <span class="cert-name">Celonis Technical Expert</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-left">
+          <span class="cert-date">Feb – Jun 2024</span>
+          <span class="cert-name">Executive Master H&amp;PS DNA – Public Administration Management &amp; European Project Design</span>
+          <span class="cert-sub">Luiss Business School, Rome</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-left">
+          <span class="cert-date">April 2025</span>
+          <span class="cert-name">ITIL® v4 Foundation – IT Service Management</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-left">
+          <span class="cert-date orange">February 2026</span>
+          <span class="cert-name">Reinvention with Agentic AI</span>
+          <span class="cert-sub">Human-Centered AI – Stanford University</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-left">
+          <span class="cert-date purple">In progress</span>
+          <span class="cert-name">PRINCE2® Foundation &amp; Practitioner</span>
+        </div>
+        <span class="cert-badge" style="background:#6B4FA0">in progress</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-name">Ilaria Dionisi</span>
+    <span class="footer-date">Updated April 2026</span>
+  </footer>
+
+</div>
+
+<script>
+  function toggle(id) {
+    var item = document.getElementById(id);
+    var trigger = item.querySelector('.acc-trigger');
+    var isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.acc-item.open').forEach(function(el) {
+      el.classList.remove('open');
+      el.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  }
+</script>
+</body>
+</html>
